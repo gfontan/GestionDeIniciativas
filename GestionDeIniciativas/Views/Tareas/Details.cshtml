@@ -1,0 +1,178 @@
+﻿@model GestionDeIniciativas.Models.Tarea
+
+@{
+    ViewData["Title"] = "Detalles de la tarea";
+    var isCompleted = Model.Estado == "Completada";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Detalles de la tarea</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #343a40;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+            .header h1 {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 700;
+                font-size: 2.5rem;
+                color: #007bff;
+            }
+
+            .header h4 {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 400;
+                font-size: 1.5rem;
+                color: #6c757d;
+            }
+
+        .detail-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+            .detail-container dt {
+                font-weight: 600;
+                margin-top: 10px;
+            }
+
+            .detail-container dd {
+                margin-bottom: 10px;
+            }
+
+        .btn-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .btn-action {
+            margin: 0 5px;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+            .btn-action:hover {
+                transform: translateY(-2px);
+            }
+
+        .btn-outline-success:hover {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: white;
+        }
+
+        .btn-outline-secondary:hover {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            color: white;
+        }
+
+        .completed {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>@ViewData["Title"]</h1>
+            <h4>Consulta los detalles de la tarea</h4>
+        </div>
+        <div class="detail-container">
+            <dl class="row">
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Nombre)</dt>
+                <dd class="col-sm-9 @(isCompleted ? "completed" : "")">@Html.DisplayFor(model => model.Nombre)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Estado)</dt>
+                <dd class="col-sm-9 @(isCompleted ? "completed" : "")">@Html.DisplayFor(model => model.Estado)</dd>
+
+                <dt class="col-sm-3">Duración</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Horas) horas</dd>
+
+                <dt class="col-sm-3">Horas restantes</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.HorasRestantes) horas</dd>
+
+                <dt class="col-sm-3">Progreso</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Progreso) %</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Categoría)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Categoría)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Iniciativa)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Iniciativa.IniciativaId)</dd>
+            </dl>
+
+            <h4>Historial de progresos</h4>
+            <hr />
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Día de la semana</th>
+                        <th>Día del mes</th>
+                        <th>@Html.DisplayNameFor(model => model.BloqueTiempos.First().Mes)</th>
+                        <th>@Html.DisplayNameFor(model => model.BloqueTiempos.First().Año)</th>
+                        <th>@Html.DisplayNameFor(model => model.BloqueTiempos.First().Progreso)</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.BloqueTiempos)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.DiaSemana)</td>
+                            <td>@Html.DisplayFor(modelItem => item.DiaMes)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Mes)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Año)</td> 
+                            <td>@Html.DisplayFor(modelItem => item.Progreso) horas</td> 
+                            
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+            <div class="btn-container">
+                <form asp-action="MarkCompleted" method="post" class="d-inline">
+                    <input type="hidden" name="id" value="@Model.TareaId" />
+                    <button type="submit" class="btn btn-outline-success btn-action" @(isCompleted ? "disabled" : "")>Marcar como completada</button>
+                </form>
+                <a class="btn btn-outline-primary btn-action" asp-action="Edit" asp-route-id="@Model?.TareaId">Editar</a>
+                <a class="btn btn-outline-secondary btn-action" asp-controller="Iniciativas" asp-action="Details" asp-route-id="@Model?.IniciativaId">Volver a la iniciativa</a>
+                @if (!isCompleted)
+                {
+                    <a class="btn btn-outline-secondary btn-action" asp-controller="BloqueTiempoes" asp-action="Create" asp-route-id="@Model?.TareaId">Añadir progreso</a>
+                }
+                else
+                {
+                    <a class="btn btn-outline-secondary btn-action disabled" href="#">Añadir progreso</a>
+                }
+            </div>
+        </div>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

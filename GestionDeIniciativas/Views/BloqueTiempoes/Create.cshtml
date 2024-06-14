@@ -1,0 +1,168 @@
+﻿    @model GestionDeIniciativas.Models.BloqueTiempo
+
+    @{
+        ViewData["Title"] = "Create";
+    }
+
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - Create</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" />
+
+        <style>
+            body {
+                background-color: #f8f9fa;
+                color: #343a40;
+                font-family: 'Roboto', sans-serif;
+            }
+
+            h1 {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 700;
+                font-size: 2.5rem;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            h4 {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 400;
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            .row {
+                justify-content: center;
+            }
+
+            .form-group label {
+                font-weight: 500;
+            }
+
+            .btn-primary {
+                background-color: #007bff;
+                border-color: #007bff;
+                transition: background-color 0.3s, transform 0.3s;
+                margin-right: 10px; /* Espacio entre botones */
+            }
+
+                .btn-primary:hover {
+                    background-color: #0056b3;
+                    border-color: #004085;
+                    transform: translateY(-2px);
+                }
+
+            .footer {
+                margin-top: 40px;
+                text-align: center;
+                color: #6c757d;
+                background-color: #f8f9fa;
+            }
+
+                /* Estilo para el botón "Back to List" */
+                .footer a {
+                    display: inline-block;
+                    color: white;
+                    text-decoration: none;
+                    transition: color 0.3s;
+                    margin-right: 10px; /* Espacio entre botones */
+                }
+
+                    .footer a:hover {
+                        color: #0056b3;
+                    }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Progreso</h1>
+            <h4>Introduzca los datos para guardar el progreso</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <label asp-for="TiempoId" class="control-label">ID Tiempo</label>
+                    <input asp-for="TiempoId" class="form-control" />
+                    <span asp-validation-for="TiempoId" class="text-danger"></span>
+                        <div class="form-group">
+                            <label asp-for="DiaSemana" class="control-label">Día de la semana</label>
+                            <select asp-for="DiaSemana" class="form-control">
+                                <option value="Lunes">Lunes</option>
+                                <option value="Martes">Martes</option>
+                                <option value="Miércoles">Miércoles</option>
+                                <option value="Jueves">Jueves</option>
+                                <option value="Viernes">Viernes</option>
+                                <option value="Sábado">Sábado</option>
+                                <option value="Domingo">Domingo</option>
+                            </select>
+                            <span asp-validation-for="DiaSemana" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="DiaMes" class="control-label">Día del mes</label>
+                            <select asp-for="DiaMes" class="form-control">
+                                @for (int i = 1; i <= 31; i++)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            </select>
+                            <span asp-validation-for="DiaMes" class="text-danger"></span>
+                        </div>
+                   
+                        <div class="form-group">
+                            <label asp-for="Mes" class="control-label">Mes</label>
+                            <select asp-for="Mes" class="form-control">
+                                <option value="Enero">Enero</option>
+                                <option value="Febrero">Febrero</option>
+                                <option value="Marzo">Marzo</option>
+                                <option value="Abril">Abril</option>
+                                <option value="Mayo">Mayo</option>
+                                <option value="Junio">Junio</option>
+                                <option value="Julio">Julio</option>
+                                <option value="Agosto">Agosto</option>
+                                <option value="Septiembre">Septiembre</option>
+                                <option value="Octubre">Octubre</option>
+                                <option value="Noviembre">Noviembre</option>
+                                <option value="Diciembre">Diciembre</option>
+                            </select>
+                            <span asp-validation-for="Mes" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Año" class="control-label">Año</label>
+                            <select asp-for="Año" class="form-control">
+                                @for (int i = DateTime.Now.Year - 10; i <= DateTime.Now.Year + 10; i++)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Año" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Progreso" class="control-label">Progreso</label>
+                            <input asp-for="Progreso" class="form-control" />
+                            <span asp-validation-for="Progreso" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="TareaId" class="control-label">ID tarea</label>
+                            <select asp-for="TareaId" class="form-control" asp-items="ViewBag.TareaId"></select>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <input type="submit" value="Añadir progreso" class="btn btn-primary" />
+                        </div>
+                    
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    </body>
+    </html>

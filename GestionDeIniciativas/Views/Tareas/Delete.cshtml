@@ -1,0 +1,130 @@
+﻿@model GestionDeIniciativas.Models.Tarea
+
+@{
+    ViewData["Title"] = "Eliminar tarea";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Eliminar tarea</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #343a40;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .row {
+            justify-content: center;
+        }
+
+        .detail-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        dt {
+            font-weight: 600;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #6c757d;
+            background-color: #f8f9fa;
+        }
+
+        /* Estilo de los botones */
+        .btn-action {
+            margin: 0 5px;
+            padding: 10px 20px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+            .btn-action:hover {
+                transform: translateY(-2px);
+            }
+
+        .btn-outline-secondary:hover {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            color: white;
+        }
+
+        .btn-outline-danger:hover {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            color: white;
+        }
+
+        .alert {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>@ViewData["Title"]</h1>
+        <h4>¿Estás seguro que quieres eliminar esta tarea?</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-8">
+                <div class="detail-container">
+                    <dl class="row">
+                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Nombre)</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Nombre)</dd>
+
+                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Estado)</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Estado)</dd>
+                        
+                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Horas)</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Horas)</dd>
+
+                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Categoría)</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Categoría)</dd>
+
+                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Iniciativa)</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Iniciativa.IniciativaId)</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="TareaId" />
+                <button type="submit" class="btn btn-outline-danger btn-action">Eliminar</button>
+                <a class="btn btn-outline-secondary btn-action" asp-action="Index">Volver a la lista</a>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

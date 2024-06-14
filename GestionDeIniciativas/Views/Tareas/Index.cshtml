@@ -1,0 +1,125 @@
+﻿@model IEnumerable<GestionDeIniciativas.Models.Tarea>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Lista de Tareas</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #343a40;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .table-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .table thead {
+            background-color: #f8f9fa;
+        }
+
+        .table th,
+        .table td {
+            text-align: left;
+            vertical-align: middle;
+            border-top: none;
+        }
+
+        .table tbody tr {
+            transition: background-color 0.3s ease;
+        }
+
+            .table tbody tr:hover {
+                background-color: #f1f3f5;
+            }
+
+        .btn-action {
+            margin: 0 2px;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+
+            .btn-action:hover {
+                color: white;
+                transform: translateY(-2px);
+            }
+
+        .btn-outline-primary:hover {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-outline-warning:hover {
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+
+        .btn-outline-danger:hover {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tareas</h1>
+        <div class="table-container">
+            <div class="col text-end">
+                <a class="btn btn-primary" asp-action="Create">Crear nueva tarea</a>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                        <th>@Html.DisplayNameFor(model => model.Estado)</th>
+                        <th>@Html.DisplayNameFor(model => model.Horas)</th>
+                        <th>@Html.DisplayNameFor(model => model.Categoría)</th>
+                        <th>@Html.DisplayNameFor(model => model.Iniciativa)</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                            <th>@Html.DisplayFor(modelItem => item.Horas)</th>
+                            <td>@Html.DisplayFor(modelItem => item.Categoría)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Iniciativa.IniciativaId)</td>
+                            <td>
+                                <a class="btn btn-sm btn-outline-primary btn-action" asp-action="Edit" asp-route-id="@item.TareaId">Editar</a>
+                                <a class="btn btn-sm btn-outline-warning btn-action" asp-action="Details" asp-route-id="@item.TareaId">Detalles</a>
+                                <a class="btn btn-sm btn-outline-danger btn-action" asp-action="Delete" asp-route-id="@item.TareaId">Eliminar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

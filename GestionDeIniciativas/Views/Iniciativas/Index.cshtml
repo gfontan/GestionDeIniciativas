@@ -1,0 +1,171 @@
+﻿@model IEnumerable<GestionDeIniciativas.Models.Iniciativa>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Lista de Iniciativas</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #343a40;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+                transform: translateY(-2px);
+            }
+
+        .btn-secondary {
+            background-color: #fdfd96;
+            border-color: #fdfd96;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+            .btn-secondary:hover {
+                background-color: #fdfd96;
+                border-color: #fdfd96;
+                transform: translateY(-2px);
+            }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .row {
+            justify-content: center;
+        }
+
+        .table-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .table thead {
+            background-color: #f8f9fa;
+        }
+
+        .table th, .table td {
+            text-align: left;
+            vertical-align: middle;
+            border-top: none;
+        }
+
+        .table tbody tr {
+            transition: background-color 0.3s ease;
+        }
+
+            .table tbody tr:hover {
+                background-color: #f1f3f5;
+            }
+
+        .btn-action {
+            margin: 0 2px;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+
+            .btn-action:hover {
+                color: white;
+                transform: translateY(-2px);
+            }
+
+        .btn-outline-primary:hover {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-outline-secondary:hover {
+            background-color: #fdfd96;
+            border-color: #fdfd96;
+        }
+
+        .btn-outline-danger:hover {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Iniciativas</h1>
+        <div class="row mb-4">
+            <div class="col text-end">
+                <a class="btn btn-primary" asp-action="Create">Crear nueva iniciativa</a>
+            </div>
+        </div>
+        <div class="table-container">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Identificador</th>
+                        <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                        <th>@Html.DisplayNameFor(model => model.Tipo)</th>
+                        <th>@Html.DisplayNameFor(model => model.Prioridad)</th>
+                        <th>@Html.DisplayNameFor(model => model.Usuario)</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.IniciativaId)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Tipo)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Prioridad)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Usuario.UsuarioId)</td>
+                            <td>
+                                <a class="btn btn-sm btn-outline-primary btn-action" asp-action="Edit" asp-route-id="@item.IniciativaId">Editar</a>
+                                <a class="btn btn-sm btn-outline-warning btn-action" asp-action="Details" asp-route-id="@item.IniciativaId">Detalles</a>
+                                <a class="btn btn-sm btn-outline-danger btn-action" asp-action="Delete" asp-route-id="@item.IniciativaId">Eliminar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

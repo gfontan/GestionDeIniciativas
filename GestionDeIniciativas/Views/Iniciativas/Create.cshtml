@@ -1,0 +1,163 @@
+﻿@model GestionDeIniciativas.Models.Iniciativa
+
+@{
+    ViewData["Title"] = "Create";
+    bool hayUsuarios = ViewBag.HayUsuarios ?? false;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Crear Iniciativa</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #343a40;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        h1, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h4 {
+            font-size: 1.5rem;
+            font-weight: 400;
+        }
+
+        .form-group label {
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+                transform: translateY(-2px);
+            }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+            .btn-secondary:hover {
+                background-color: #565e64;
+                border-color: #43494e;
+                transform: translateY(-2px);
+            }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .row {
+            justify-content: center;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #6c757d;
+            background-color: #f8f9fa;
+        }
+
+        .alert-warning {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Crear iniciativa</h1>
+        <h4>Introduzca los datos de la iniciativa que desea crear</h4>
+        <div class="row">
+            <div class="col-md-6 form-container">
+                @if (!hayUsuarios)
+                {
+                    <div class="alert alert-warning" role="alert">
+                        No hay usuarios creados. Por favor, añada un usuario antes de continuar.
+                    </div>
+                }
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <div class="form-group mb-3">
+                        <label asp-for="IniciativaId" class="control-label">ID Iniciativa</label>
+                        <input asp-for="IniciativaId" class="form-control" />
+                        <span asp-validation-for="IniciativaId" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group mb-3">
+                        <label asp-for="Nombre" class="control-label">Nombre</label>
+                        <input asp-for="Nombre" class="form-control" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group mb-3">
+                        <label asp-for="Tipo" class="control-label">Tipo</label>
+                        <select asp-for="Tipo" class="form-control">
+                            <option value="">Seleccione un tipo</option>
+                            <option value="Proyecto">Proyecto</option>
+                            <option value="Certificación">Certificación</option>
+                            <option value="Otros">Otros</option>
+                        </select>
+                        <span asp-validation-for="Tipo" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group mb-3">
+                        <label asp-for="Prioridad" class="control-label">Prioridad</label>
+                        <select asp-for="Prioridad" class="form-control">
+                            <option value="">Seleccione una prioridad</option>
+                            <option value="Alta">Alta</option>
+                            <option value="Media">Media</option>
+                            <option value="Baja">Baja</option>
+                        </select>
+                        <span asp-validation-for="Prioridad" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group mb-4">
+                        <label asp-for="UsuarioId" class="control-label">Usuario</label>
+                        <select asp-for="UsuarioId" class="form-control" asp-items="ViewBag.UsuarioId"></select>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Crear" class="btn btn-primary" @(hayUsuarios ? "" : "disabled") />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="footer mt-4">
+            <a class="btn btn-secondary" asp-action="Index">Volver a la Lista</a>
+        </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</body>
+</html>

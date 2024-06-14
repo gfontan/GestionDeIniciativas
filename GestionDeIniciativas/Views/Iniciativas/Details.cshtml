@@ -1,0 +1,146 @@
+﻿@model GestionDeIniciativas.Models.Iniciativa
+
+@{
+    ViewData["Title"] = "Details";
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Detalles de la iniciativa</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #343a40;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        h1, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h4 {
+            font-size: 1.5rem;
+            font-weight: 400;
+        }
+
+        .details-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary, .btn-secondary {
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+                transform: translateY(-2px);
+            }
+
+            .btn-secondary:hover {
+                background-color: #565e64;
+                border-color: #43494e;
+                transform: translateY(-2px);
+            }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .row {
+            justify-content: center;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #6c757d;
+        }
+
+        /* Clases de borde condicionales */
+        .border-danger {
+            border: 3px solid #dc3545 !important;
+        }
+
+        .border-warning {
+            border: 3px solid #ffc107 !important;
+        }
+
+        .border-success {
+            border: 3px solid #28a745 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Detalles</h1>
+        <div class="row">
+            <div class="col-md-8 details-container @(Model.Prioridad == "Alta" ? "border border-danger" : Model.Prioridad == "Media" ? "border border-warning" : Model.Prioridad == "Baja" ? "border border-success" : "")">
+                <h4>Detalles de la iniciativa</h4>
+                <hr />
+                <dl class="row">
+                    <dt class="col-sm-3">Identificador</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.IniciativaId)</dd>
+                    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Nombre)</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Nombre)</dd>
+                    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Tipo)</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Tipo)</dd>
+                    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Prioridad)</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Prioridad)</dd>
+                    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Usuario)</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.UsuarioId)</dd>
+                </dl>
+
+                <h4>Tareas relacionadas</h4>
+                <hr />
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Tareas.First().Nombre)</th>
+                            <th>@Html.DisplayNameFor(model => model.Tareas.First().Estado)</th>
+                            <th>@Html.DisplayNameFor(model => model.Tareas.First().Categoría)</th>
+                            <th>Identificador</th> <!-- Modificado aquí -->
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Tareas)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Categoría)</td>
+                                <td>@Html.DisplayFor(modelItem => item.TareaId)</td> <!-- Ajustado para mostrar el Identificador -->
+                                <td>
+                                    <a class="btn btn-outline-primary btn-action" asp-action="Details" asp-controller="Tareas" asp-route-id="@item.TareaId">Detalles</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.IniciativaId">Editar</a>
+                    <a class="btn btn-secondary" asp-action="Index">Volver a la lista</a>
+                    <a class="btn btn-primary" asp-controller="Tareas" asp-action="Create">Crear tarea</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

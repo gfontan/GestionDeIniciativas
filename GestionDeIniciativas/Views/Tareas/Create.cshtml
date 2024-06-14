@@ -1,0 +1,154 @@
+﻿@model GestionDeIniciativas.Models.Tarea
+
+@{
+    ViewData["Title"] = "Create";
+    var hayIniciativas = ViewBag.HayIniciativas as bool? ?? false;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Crear Tarea</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #343a40;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .row {
+            justify-content: center;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group label {
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+                transform: translateY(-2px);
+            }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #6c757d;
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Crear tarea</h1>
+        <h4>Rellene los datos de la tarea</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-container">
+                    <form asp-action="Create">
+                        <div class="form-group">
+                            <label asp-for="TareaId" class="control-label">ID Tarea</label>
+                            <input asp-for="TareaId" class="form-control"></input>
+                            <span asp-validation-for="TareaId" class="text-danger"></span>
+                        </div>
+                        <br/>
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        <div class="form-group">
+                            <label asp-for="Nombre" class="control-label"></label>
+                            <input asp-for="Nombre" class="form-control" />
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label asp-for="Categoría" class="control-label"></label>
+                            <select asp-for="Categoría" class="form-control">
+                                <option value="">Seleccione una categoría</option>
+                                <option value="Vídeo">Vídeo</option>
+                                <option value="Lectura">Lectura</option>
+                                <option value="Examen">Examen</option>
+                                <option value="Informe">Informe</option>
+                                <option value="Codificación">Codificación</option>
+                                <option value="Planificación">Planificación</option>
+                                <option value="Diseño">Diseño</option>
+                                <option value="Pruebas">Pruebas</option>
+                            </select>
+                            <span asp-validation-for="Categoría" class="text-danger"></span>
+                        </div>
+                        <br />
+                        <div class="form-group mb-3">
+                            <label asp-for="Horas" class="control-label">Horas</label>
+                            <input asp-for="Horas" class="form-control" />
+                            <span asp-validation-for="Horas" class="text-danger"></span>
+                        </div>
+
+                        <!-- Campo oculto para Estado -->
+                        <input type="hidden" asp-for="Estado" value="Pendiente" />
+
+                        <div class="form-group">
+                            <label asp-for="IniciativaId" class="control-label">ID Iniciativa</label>
+                            <select asp-for="IniciativaId" class="form-control" asp-items="ViewBag.IniciativaId"></select>
+                            <span asp-validation-for="IniciativaId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-3">
+                            <input type="submit" value="Crear" class="btn btn-primary" @(hayIniciativas ? "" : "disabled") />
+                        </div>
+                        @if (!hayIniciativas)
+                        {
+                            <div class="alert alert-warning mt-3">
+                                No hay iniciativas disponibles. Por favor, crea una iniciativa antes de añadir tareas.
+                            </div>
+                        }
+                        </form>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <a class="btn btn-outline-secondary mt-3" asp-action="Index">Volver a la lista</a>
+        </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</body>
+</html>

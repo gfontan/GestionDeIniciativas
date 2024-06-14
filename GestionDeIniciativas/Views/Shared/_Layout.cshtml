@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Gestor de iniciativas</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ListaIniciativas.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f0f0; /* Light background similar to Canva */
+            color: #333; /* Dark text color */
+        }
+
+        /* Estilo para el texto "Aguifont Manager" */
+        .navbar-brand {
+            font-family: 'Arial Black', sans-serif; /* Utiliza una fuente en negrita para resaltar */
+            font-size: 24px; /* Ajusta el tamaño del texto según sea necesario */
+            text-transform: uppercase; /* Convierte el texto a mayúsculas para un aspecto más audaz */
+            letter-spacing: 1px; /* Ajusta el espaciado entre letras para una apariencia más equilibrada */
+            color: #000000; /* Color del texto */
+            text-decoration: none; /* Elimina cualquier subrayado del texto */
+            transition: color 0.3s, transform 0.3s;
+        }
+
+            /* Estilo para cambiar el cursor al pasar por encima del texto */
+            .navbar-brand:hover {
+                color: #80cee1; /* Cambia el color del texto al pasar el cursor por encima */
+                transform: translateY(-2px); /* Añade una pequeña animación de desplazamiento */
+            }
+
+        .navbar {
+            background-color: #ffffff !important; /* White background */
+            transition: background-color 0.3s;
+        }
+
+        .navbar-brand {
+            color: #000000 !important; /* Black text color */
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .navbar-dark .navbar-nav .nav-link {
+            color: #000000 !important; /* Black text color */
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .navbar-dark .navbar-toggler-icon {
+            color: #000000 !important; /* Black color */
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .navbar-dark .navbar-toggler {
+            border-color: rgba(0, 0, 0, 0.5) !important; /* Dark border color */
+        }
+
+        .nav-item:hover .nav-link {
+            color: #80cee1 !important; /* Blue color on hover */
+            transform: translateY(-2px);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Optional shadow for more emphasis */
+        }
+
+        /* Estilo para el logo */
+        .navbar-brand img {
+            max-height: 40px; /* Ajusta el tamaño del logo según sea necesario */
+            /* Agrega cualquier otro estilo necesario para el logo */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark border-bottom box-shadow mb-3 animate_animated animate_fadeInDown">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Aguifont Manager</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <!-- Aquí agregamos la clase justify-content-end -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Iniciativas" asp-action="Index">Iniciativas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Tareas" asp-action="Index">Tareas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Reporte" asp-action="ReporteIniciativas">Mis estadísticas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="LogOut">Cerrar sesión</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

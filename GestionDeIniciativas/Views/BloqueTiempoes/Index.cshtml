@@ -1,0 +1,59 @@
+﻿@model IEnumerable<GestionDeIniciativas.Models.BloqueTiempo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaMes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaSemana)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Progreso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Año)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tarea)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaMes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaSemana)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Progreso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tarea.TareaId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.TiempoId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.TiempoId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.TiempoId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

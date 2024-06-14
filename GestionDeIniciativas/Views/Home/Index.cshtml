@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewData["Title"]</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f0f0;
+            color: #343a40;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .navbar-nav .nav-item {
+            margin-left: 15px; /* Añade margen izquierdo a los elementos de la barra de navegación */
+        }
+
+        .hero-section {
+            padding: 50px 0; /* Reducción del padding para hacer el cuadro más pequeño */
+            background: linear-gradient(33deg, #D3BAFE 0%, #D2DBF9 50%, #C1EEF3 100%); /* Degradado entre morado y celeste pastel */
+            border-radius: 20px; /* Bordes redondos */
+        }
+
+            .hero-section h1 {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 700;
+                font-size: 3rem; /* Reducción del tamaño de la fuente */
+                margin-bottom: 10px; /* Reducción del margen inferior */
+                color: black; /* Texto blanco similar al de Canva */
+            }
+
+            .hero-section p {
+                font-size: 1rem; /* Reducción del tamaño de la fuente */
+                color: black;
+                /* Texto blanco similar al de Canva */
+            }
+
+        .btn-custom {
+            background-color: #1abc9c; /* Color de botón verde similar al de Canva */
+            border-color: #1abc9c;
+            color: white;
+            transition: background-color 0.3s, transform 0.3s;
+            border-radius: 20px; /* Bordes redondos */
+        }
+
+            .btn-custom:hover {
+                background-color: #16a085; /* Color de botón verde más oscuro similar al de Canva */
+                border-color: #16a085;
+                transform: translateY(-2px);
+            }
+
+        .custom-container {
+            padding-top: 50px;
+            padding-bottom: 50px;
+            text-align: center;
+        }
+
+        .card {
+            border-radius: 20px; /* Bordes redondos para las tarjetas */
+        }
+
+        .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #333; /* Color de título más oscuro similar al de Canva */
+        }
+
+        .card-body {
+            color: #555;
+            /* Color de texto más oscuro similar al de Canva */
+        }
+
+        .animate__delay-short {
+            animation-delay: 0.5s;
+        }
+
+        .animate__delay-medium {
+            animation-delay: 1s;
+        }
+
+        .animate__delay-long {
+            animation-delay: 1.5s;
+        }
+
+        .hero-section .logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 50px; /* Ajusta el tamaño de la imagen según sea necesario */
+            height: 50px; /* Ajusta el tamaño de la imagen según sea necesario */
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section text-center text-white animate__animated animate__fadeIn">
+        <h1 class="display-4">Bienvenido a tu gestor de iniciativas</h1>
+        <p class="lead">¿Qué desea hacer hoy?</p>
+    </div>
+    <div class="custom-container container">
+        <div class="row">
+            <div class="col-md-4 mb-4 animate__animated animate__fadeInUp animate__delay-short">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Iniciativas</h5>
+                        <p class="card-text">Crea una nueva iniciativa</p>
+                        <a class="btn btn-custom" asp-area="" asp-controller="Iniciativas" asp-action="Create">Crear</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4 animate__animated animate__fadeInUp animate__delay-medium">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Tareas</h5>
+                        <p class="card-text">Crea una nueva tarea</p>
+                        <a class="btn btn-custom" asp-area="" asp-controller="Tareas" asp-action="Create">Crear</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4 animate__animated animate__fadeInUp animate__delay-long">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Usuarios</h5>
+                        <p class="card-text">Crea un nuevo usuario</p>
+                        <a class="btn btn-custom" asp-area="" asp-controller="Usuarios" asp-action="Create">Crear</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

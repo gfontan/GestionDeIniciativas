@@ -1,0 +1,152 @@
+﻿@model GestionDeIniciativas.Models.Tarea
+
+@{
+    ViewData["Title"] = "Editar Tarea";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Editar tarea</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #343a40;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .row {
+            justify-content: center;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            font-weight: 500;
+        }
+
+        /* Estilo de los botones */
+        .btn-action {
+            margin: 0 5px;
+            padding: 10px 20px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+            .btn-action:hover {
+                transform: translateY(-2px);
+            }
+
+        .btn-outline-secondary:hover {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            color: white;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+                transform: translateY(-2px);
+            }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #6c757d;
+            background-color: #f8f9fa;
+        }
+
+        .alert {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>@ViewData["Title"]</h1>
+        <h4>Editar los detalles de la tarea</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-container">
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="TareaId" />
+                        <div class="form-group">
+                            <label asp-for="Nombre" class="control-label"></label>
+                            <input asp-for="Nombre" class="form-control" />
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Estado" class="control-label"></label>
+                            <select asp-for="Estado" class="form-control">
+                                <option value="Pendiente">Pendiente</option>
+                                <option value="En proceso">En proceso</option>
+                                <option value="Completado">Completado</option>
+                            </select>
+                            <span asp-validation-for="Estado" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Horas" class="control-label"></label>
+                            <input asp-for="Horas" class="form-control" />
+                            <span asp-validation-for="Horas"class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Categoría" class="control-label"></label>
+                            <input asp-for="Categoría" class="form-control" />
+                            <span asp-validation-for="Categoría" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="IniciativaId" class="control-label"></label>
+                            <select asp-for="IniciativaId" class="form-control" asp-items="ViewBag.IniciativaId"></select>
+                            <span asp-validation-for="IniciativaId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-3">
+                            <input type="submit" value="Guardar" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <a class="btn btn-outline-secondary btn-action" asp-action="Index">Volver a la lista</a>
+        </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
